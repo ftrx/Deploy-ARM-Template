@@ -8,9 +8,6 @@ env:
   AZURE_SUBSCRIPTION_ID:  ${{ secrets.AZURE_SUBSCRIPTION_ID }}   # set this to your Azure Subscription Id
   AZURE_RESOURCE_GROUP: GitHubActionExercise-rg   # set this to your target resource group
 
-permissions:
-      id-token: write
-      contents: read
       
 jobs:
   deploy-virtual-network-template:
@@ -19,12 +16,10 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@main
 
-      - name: 'Az CLI login'
+      - name: Azure Login
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Deploy ARM Template
         uses: azure/arm-deploy@v1
