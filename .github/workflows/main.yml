@@ -8,6 +8,10 @@ env:
   AZURE_SUBSCRIPTION_ID:  ${{ secrets.AZURE_SUBSCRIPTION_ID }}   # set this to your Azure Subscription Id
   AZURE_RESOURCE_GROUP: GitHubActionExercise-rg   # set this to your target resource group
 
+permissions:
+      id-token: write
+      contents: read
+      
 jobs:
   deploy-virtual-network-template:
     runs-on: ubuntu-latest
